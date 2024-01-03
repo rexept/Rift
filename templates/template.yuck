@@ -1,0 +1,13 @@
+(defwidget powermenu[]
+  (box :class "main-box" :orientation "v" :space-evenly "false"
+    (box :class "main-buttons-box" :orientation "h" :space-evenly "false"
+      (button :tooltip "Mirror" :class "mirror" :onclick "rift output mirror" "🔄")
+      (button :tooltip "Extend" :class "extend" :onclick "rift output extend" "↔️")
+      (button :tooltip "Replace" :class "replace" :onclick "rift output replace" "🔀"))))
+
+(defwindow rift
+  :windowtype "dock"
+  :wm-ignore true
+  :monitor 0
+  :geometry (geometry :anchor "center" :width "400px" :height "100px")
+  (powermenu))

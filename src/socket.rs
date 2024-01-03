@@ -38,7 +38,8 @@ async fn hdmi_connected() -> Result<bool> {
         return Err(anyhow::anyhow!("Failed to get HDMI connection status"));
     }
 
-    let status: HdmiConnection = HdmiConnection::from_string(String::from_utf8(status.stdout)?.as_str().trim())?;
+    let status: HdmiConnection =
+        HdmiConnection::from_string(String::from_utf8(status.stdout)?.as_str().trim())?;
 
     return Ok(status.to_bool());
 }
@@ -88,5 +89,30 @@ pub async fn connect_to_hyprland_socket() -> Result<()> {
         }
     }
 
+    return Ok(());
+}
+
+pub async fn disconnect_from_hyprland_socket() -> () {
+    let _ = Command::new("pkill").arg("rift").spawn();
+}
+
+pub async fn restart() -> Result<()> {
+    disconnect_from_hyprland_socket().await;
+    connect_to_hyprland_socket().await
+}
+
+pub async fn status() -> Result<()> {
+    let exists = Command::new("pgrep")
+        .arg("-x")
+        .arg("rift")
+        .stdout(std::process::Stdio::null())
+        .stderr(std::process::Stdio::null())
+        .status()
+        .await?;
+
+    match exists.code() {
+        Some(0) => println!("Active"),
+        _ => println!("Inactive"),
+    };
     return Ok(());
 }

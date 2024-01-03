@@ -11,7 +11,7 @@ pub struct RiftArgs {
 pub enum EntityType {
     #[clap(author, version, about)]
     /// Start the daemon
-    Daemon,
+    Daemon(DaemonCommand),
     #[clap(author, version, about)]
     /// Open the menu
     Menu,
@@ -21,9 +21,31 @@ pub enum EntityType {
 }
 
 #[derive(Debug, Args, PartialEq)]
+pub struct DaemonCommand {
+    #[clap(subcommand)]
+    pub command: DaemonSubcommand,
+}
+
+#[derive(Debug, Args, PartialEq)]
 pub struct OutputCommand {
     #[clap(subcommand)]
     pub command: OutputSubcommand,
+}
+
+#[derive(Debug, Subcommand, PartialEq)]
+pub enum DaemonSubcommand {
+    #[clap(author, version, about)]
+    /// Start the daemon
+    Start,
+    #[clap(author, version, about)]
+    /// Stop the daemon
+    Stop,
+    #[clap(author, version, about)]
+    /// Restart the daemon
+    Restart,
+    #[clap(author, version, about)]
+    /// Print the status of the daemon
+    Status,
 }
 
 #[derive(Debug, Subcommand, PartialEq)]

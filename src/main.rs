@@ -18,7 +18,7 @@ async fn main() -> Result<()> {
             args::DaemonSubcommand::Restart => socket::restart().await?,
             args::DaemonSubcommand::Status => socket::status().await?,
         },
-        EntityType::Menu => eww::open_eww_widget().await?,
+        EntityType::Menu => eww::monitor::open_eww_widget().await?,
         EntityType::Output(output) => match output.command {
             OutputSubcommand::Mirror => monitor::mirror()?,
             OutputSubcommand::Extend => monitor::extend()?,

@@ -1,5 +1,5 @@
 use crate::{eww, monitor};
-use anyhow::Result;
+use anyhow::{anyhow, Result};
 use std::env;
 use tokio::io::AsyncReadExt;
 use tokio::net::UnixStream;
@@ -22,7 +22,7 @@ impl HdmiConnection {
         match s {
             "connected" => Ok(HdmiConnection::Connected),
             "disconnected" => Ok(HdmiConnection::Disconnected),
-            _ => Err(anyhow::anyhow!("Invalid HDMI connection state")),
+            _ => Err(anyhow!("Invalid HDMI connection state")),
         }
     }
 }
@@ -35,7 +35,7 @@ async fn hdmi_connected() -> Result<bool> {
         .await?;
 
     if status.status.code().unwrap() != 0 {
-        return Err(anyhow::anyhow!("Failed to get HDMI connection status"));
+        return Err(anyhow!("Failed to get HDMI connection status"));
     }
 
     let status: HdmiConnection =
@@ -77,7 +77,7 @@ pub async fn connect_to_hyprland_socket() -> Result<()> {
                         monitor::laptop_screen_on();
                     }
                     if connected {
-                        eww::open_eww_widget().await?;
+                        eww::monitor::open_eww_widget().await?;
                     }
                     is_connected = Some(connected);
                 }

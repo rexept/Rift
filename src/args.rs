@@ -10,7 +10,7 @@ pub struct RiftArgs {
 #[derive(Debug, Subcommand, PartialEq)]
 pub enum EntityType {
     #[clap(author, version, about)]
-    /// Start the daemon
+    /// Manage the daemon
     Daemon(DaemonCommand),
     #[clap(author, version, about)]
     /// Open the menu

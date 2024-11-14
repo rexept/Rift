@@ -1,11 +1,13 @@
 use anyhow::Result;
 use std::process::Command;
 
+
 fn close_eww() -> Result<()> {
-    let home = std::env::var("HOME")?;
+    let config = std::env::var("XDG_CONFIG_HOME")?;
+
     let _ = Command::new("eww")
         .arg("-c")
-        .arg(format!("{}/.config/eww/rift", home))
+        .arg(format!("{}/eww/rift", config))
         .arg("close")
         .arg("rift")
         .spawn();

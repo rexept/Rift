@@ -6,7 +6,7 @@ use tokio::process::Command;
 use tokio::time::{sleep, Duration};
 
 async fn create_eww() -> Result<()> {
-    let home = env::var("HOME")?;
+    let config = env::var("XDG_CONFIG_HOME")?;
     const YUCK_CONTENT: &[u8] = include_bytes!("../templates/template.yuck");
     const SCSS_CONTENT: &[u8] = include_bytes!("../templates/template.scss");
 
@@ -14,16 +14,16 @@ async fn create_eww() -> Result<()> {
     let mut scss_content = SCSS_CONTENT;
 
     // Create the directory if it doesnt exist
-    if !path_exists(&format!("{}/.config/eww", home)).await? {
-        fs::create_dir_all(format!("{}/.config/eww", home)).await?;
+    if !path_exists(&format!("{}/eww", config)).await? {
+        fs::create_dir_all(format!("{}/eww", config)).await?;
     }
-    if !path_exists(&format!("{}/.config/eww/rift", home)).await? {
-        fs::create_dir_all(format!("{}/.config/eww/rift", home)).await?;
+    if !path_exists(&format!("{}/eww/rift", config)).await? {
+        fs::create_dir_all(format!("{}/eww/rift", config)).await?;
     }
 
     // Write files
-    let yuck_path = format!("{}/.config/eww/rift/eww.yuck", home);
-    let scss_path = format!("{}/.config/eww/rift/eww.scss", home);
+    let yuck_path = format!("{}/eww/rift/eww.yuck", config);
+    let scss_path = format!("{}/eww/rift/eww.scss", config);
     io::copy(&mut yuck_content, &mut File::create(&yuck_path).await?).await?;
     io::copy(&mut scss_content, &mut File::create(&scss_path).await?).await?;
 
@@ -40,16 +40,16 @@ async fn run_eww(eww: String) -> Result<()> {
 
 pub async fn open_eww_widget() -> Result<()> {
     // Files and cmd
-    let home = env::var("HOME")?;
-    let eww = format!("eww -c {}/.config/eww/rift", home);
+    let config = env::var("XDG_CONFIG_HOME")?;
+    let eww = format!("eww -c {}/eww/rift", config);
 
-    if !path_exists(&format!("{}/.config/eww/rift", home)).await? {
+    if !path_exists(&format!("{}/eww/rift", config)).await? {
         create_eww().await?;
     }
-    if !path_exists(&format!("{}/.config/eww/rift/eww.yuck", home)).await? {
+    if !path_exists(&format!("{}/eww/rift/eww.yuck", config)).await? {
         create_eww().await?;
     }
-    if !path_exists(&format!("{}/.config/eww/rift/eww.scss", home)).await? {
+    if !path_exists(&format!("{}/eww/rift/eww.scss", config)).await? {
         create_eww().await?;
     }
 

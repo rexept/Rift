@@ -1,7 +1,7 @@
 # Rift
 An application to detect HDMI changes in Hyprland.
 
-![Rift Menu Screenshot](screenshots/Rift_cli_screenshot_cropped.png)
+![Rift Menu Screenshot](screenshots/Rift_menu_screenshot_cropped1.png)
 ![Rift Cli Screenshot](screenshots/Rift_cli_screenshot.png)
 
 

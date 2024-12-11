@@ -14,4 +14,4 @@ Please make sure you have these installed.
 
 
 Change monitor settings in monitor.rs. \
-This was tested on Arch, but should work fine on other distros.
+This was tested on Arch Linux, but should work fine on other distros.

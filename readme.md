@@ -1,6 +1,10 @@
 # Rift
 An application to detect HDMI changes in Hyprland.
 
+![Rift Menu Screenshot](screenshots/Rift_menu_screenshot.png)
+![Rift Cli Screenshot](screenshots/Rift_cli_screenshot.png)
+
+
 # Requirements
 - Linux (Does NOT work on Windows/Mac)
 - [Hyprland](https://github.com/hyprwm/Hyprland) as DE

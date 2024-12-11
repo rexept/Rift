@@ -14,6 +14,7 @@ fn close_eww() -> Result<()> {
     return Ok(());
 }
 
+// TODO: UPDATE TO MAKE IT EDITABLE
 const MONITOR_CONTENTS: [&str; 7] = [
     "eDP-1,1920x1080@60,1920x0,1",
     "HDMI-A-1,3840x2160,0x0,1",

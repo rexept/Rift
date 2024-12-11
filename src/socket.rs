@@ -93,6 +93,7 @@ pub async fn connect_to_hyprland_socket() -> Result<()> {
 }
 
 pub async fn disconnect_from_hyprland_socket() -> () {
+    // Make better?
     let _ = Command::new("pkill").arg("rift").spawn();
 }
 

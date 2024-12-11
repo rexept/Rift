@@ -45,11 +45,12 @@ async fn hdmi_connected() -> Result<bool> {
 }
 
 pub async fn connect_to_hyprland_socket() -> Result<()> {
-    // Get the instance signature from the environment variable
+    // Get the instance signature and runtime directory from the environment variables
     let instance_signature = env::var("HYPRLAND_INSTANCE_SIGNATURE")?;
+    let runtime_directory = env::var("XDG_RUNTIME_DIR")?;
 
     // Create the path to the socket
-    let socket_path = format!("/tmp/hypr/{}/.socket2.sock", instance_signature);
+    let socket_path = format!("{}/hypr/{}/.socket2.sock", runtime_directory, instance_signature);
 
     // Create a UnixStream
     let mut stream = UnixStream::connect(&socket_path).await?;

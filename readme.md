@@ -10,5 +10,8 @@ An application to detect HDMI changes in Hyprland.
 - [Hyprland](https://github.com/hyprwm/Hyprland) as DE
 - [Eww](https://github.com/elkowar/eww)
 
+Please make sure you have these installed.
+
+
 Change monitor settings in monitor.rs. \
 This was tested on Arch, but should work fine on other distros.
